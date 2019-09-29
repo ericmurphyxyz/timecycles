@@ -23,11 +23,11 @@ export default {
   props: {
     cycleStarted: Boolean,
     cycleRunning: Boolean,
-    cycleRemaining: Number
+    cycleDefault: Number
   },
   computed: {
     defaultTime() {
-      return Math.floor(this.cycleRemaining / 60);
+      return Math.floor(this.cycleDefault / 60);
     }
   }
 };

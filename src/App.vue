@@ -3,8 +3,8 @@
     <BeforeCycle
       :cycleStarted="cycleStarted"
       :cycleRunning="cycleRunning"
-      :cycleRemaining="cycleRemaining"
-      @update="updateTime"
+      :cycleDefault="cycleDefault"
+      @update="updateDefault"
     />
     <Countdown
       :cycleStarted="cycleStarted"
@@ -58,8 +58,10 @@ export default {
       this.cycleRunning = false;
       clearInterval(this.interval);
     },
-    updateTime(newTime) {
-      this.cycleRemaining = newTime * 60;
+    updateDefault(newTime) {
+      const newSeconds = newTime * 60;
+      this.cycleDefault = newSeconds;
+      this.cycleRemaining = newSeconds;
     },
     resetCycle() {
       this.cycleStarted = false;
