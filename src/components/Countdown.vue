@@ -1,6 +1,6 @@
 <template>
   <div class="cycle">
-    <p class="countdown">{{ cycleRemaining }}</p>
+    <p class="countdown">{{ minutes }}:{{ seconds }}</p>
     <button v-if="!cycleRunning" @click="$emit('start')">Start</button>
     <button v-if="cycleRunning" @click="$emit('pause')">Pause</button>
   </div>
@@ -12,6 +12,15 @@ export default {
   props: {
     cycleRunning: Boolean,
     cycleRemaining: Number
+  },
+  computed: {
+    minutes() {
+      return Math.floor(this.cycleRemaining / 60);
+    },
+    seconds() {
+      const seconds = this.cycleRemaining % 60;
+      return seconds < 10 ? "0" + seconds : seconds;
+    }
   }
 };
 </script>
