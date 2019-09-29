@@ -3,7 +3,7 @@
     How many minutes for your work cycle?
     <select @change="$emit('update', $event.target.value)">
       <option
-        v-for="(time,index) in times"
+        v-for="(time, index) in times"
         :value="time"
         :key="index"
         :selected="time === defaultTime"

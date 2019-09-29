@@ -31,8 +31,12 @@ export default {
       interval: null,
       cycleStarted: false,
       cycleRunning: false,
-      cycleRemaining: 1800
+      cycleDefault: 1800,
+      cycleRemaining: null
     };
+  },
+  created() {
+    this.cycleRemaining = this.cycleDefault;
   },
   methods: {
     startCycle() {
@@ -43,7 +47,11 @@ export default {
       this.interval = setInterval(this.continueCycle, 1000);
     },
     continueCycle() {
-      this.cycleRemaining--;
+      if (this.cycleRemaining > 0) {
+        this.cycleRemaining--;
+      } else {
+        this.resetCycle();
+      }
     },
     pauseCycle() {
       // Clear interval from work cycle
@@ -52,6 +60,12 @@ export default {
     },
     updateTime(newTime) {
       this.cycleRemaining = newTime * 60;
+    },
+    resetCycle() {
+      this.cycleStarted = false;
+      this.cycleRunning = false;
+      clearInterval(this.interval);
+      this.cycleRemaining = this.cycleDefault;
     }
   }
 };
