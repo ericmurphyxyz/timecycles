@@ -1,17 +1,27 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Time Cycles" />
+    <Countdown :cycleRemaining="cycleRemaining" @start="startCycle" />
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import Countdown from "./components/Countdown";
 
 export default {
   name: "app",
   components: {
-    HelloWorld
+    Countdown
+  },
+  data() {
+    return {
+      cycleRemaining: 3600
+    };
+  },
+  methods: {
+    startCycle() {
+      this.cycleRemaining -= 1;
+      setTimeout(this.startCycle, 1000);
+    }
   }
 };
 </script>
