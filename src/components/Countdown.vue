@@ -1,7 +1,8 @@
 <template>
   <div class="cycle">
-    <span class="countdown">{{ cycleRemaining }}</span>
-    <button @click="$emit('start')">Start</button>
+    <p class="countdown">{{ cycleRemaining }}</p>
+    <button v-if="!cycleRunning" @click="$emit('start')">Start</button>
+    <button v-if="cycleRunning" @click="$emit('pause')">Pause</button>
   </div>
 </template>
 
@@ -9,6 +10,7 @@
 export default {
   name: "Countdown",
   props: {
+    cycleRunning: Boolean,
     cycleRemaining: Number
   }
 };

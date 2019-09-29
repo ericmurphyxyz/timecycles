@@ -1,6 +1,11 @@
 <template>
   <div id="app">
-    <Countdown :cycleRemaining="cycleRemaining" @start="startCycle" />
+    <Countdown
+      :cycleRunning="cycleRunning"
+      :cycleRemaining="cycleRemaining"
+      @start="startCycle"
+      @pause="pauseCycle"
+    />
   </div>
 </template>
 
@@ -14,13 +19,22 @@ export default {
   },
   data() {
     return {
+      interval: null,
+      cycleRunning: false,
       cycleRemaining: 3600
     };
   },
   methods: {
     startCycle() {
-      this.cycleRemaining -= 1;
-      setTimeout(this.startCycle, 1000);
+      this.cycleRunning = true;
+      this.interval = setInterval(this.continueCycle, 1000);
+    },
+    continueCycle() {
+      this.cycleRemaining--;
+    },
+    pauseCycle() {
+      this.cycleRunning = false;
+      clearInterval(this.interval);
     }
   }
 };
